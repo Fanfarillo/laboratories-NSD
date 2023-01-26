@@ -10,7 +10,7 @@ Fare il setup di Tiny 5 (scripts/tiny5/Setup.sh):
     sudo echo 1 > /proc/sys/net/ipv4/ip_forward			#abilita il forwarding dei pacchetti
     sudo ip route add 16.0.0.0/24 via 1.0.0.2			#aggiunge la rotta per la rete DMZ 16.0.0.0
     sudo ip route add 10.0.0.0/24 via 1.0.0.2			#aggiunge la rotta per la rete LAN 10.0.0.0
-    iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE	#MASQUERADE traduce gli indirizzi sorgente
+    iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE	        #MASQUERADE traduce gli indirizzi sorgente
 
 ### Step 3
 Configurare gli indirizzi IP di Lubutu1, che farà da router (scripts/lubuntu1/Setup.sh):
@@ -51,31 +51,31 @@ Fare il setup di Tiny 4 (scripts/tiny4/Setup.sh):
 ### Step 8
 Configurare le IP table in Lubuntu 1 (scripts/lubuntu1/ConfIpTables.sh):
 
-    sudo iptables -F									#effettua il flush della vecchia configurazione dell'IP table, se presente
+    sudo iptables -F						#effettua il flush della vecchia configurazione dell'IP table, se presente
     sudo iptables -P FORWARD DROP
     sudo iptables -P INPUT DROP
-    sudo iptables -P OUTPUT ACCEPT						#permette tutto il traffico in uscita
+    sudo iptables -P OUTPUT ACCEPT					#permette tutto il traffico in uscita
     sudo iptables -A FORWARD -m state --state ESTABLISHED -j ACCEPT	#permette il traffico (in forwarding) relativo alle connessioni già stabilite
     sudo iptables -A FORWARD -i $LAN -p tcp --dport 22 -j ACCEPT	#permette il traffico SSH con sorgente=LAN e destinazione=Internet
     sudo iptables -A FORWARD -i $LAN -p tcp --dport 80 -j ACCEPT	#permette il traffico HTTP con sorgente=LAN e destinazione=Internet
     sudo iptables -A FORWARD -i $LAN -p tcp --dport 443 -j ACCEPT	#permette il traffico HTTPS con sorgente=LAN e destinazione=Internet
     sudo iptables -A FORWARD -i $LAN -p tcp --dport 53 -j ACCEPT	#permette il traffico DNS con sorgente=LAN e destinazione=Internet
-    sudo iptables -A FORWARD -i $LAN -o $DMZ -j ACCEPT			#permette tutto il traffico con sorgente=LAN e destinazione=DMZ
-    sudo iptables -A FORWARD -i $EXT -o $DMZ -j ACCEPT			#permette tutto il traffico con sorgente=Internet e destinazione=DMZ
-    sudo iptables -A FORWARD -i $DMZ -o $EXT -j ACCEPT			#permette tutto il traffico con sorgente=DMZ e destinazione=Internet
+    sudo iptables -A FORWARD -i $LAN -o $DMZ -j ACCEPT		#permette tutto il traffico con sorgente=LAN e destinazione=DMZ
+    sudo iptables -A FORWARD -i $EXT -o $DMZ -j ACCEPT		#permette tutto il traffico con sorgente=Internet e destinazione=DMZ
+    sudo iptables -A FORWARD -i $DMZ -o $EXT -j ACCEPT		#permette tutto il traffico con sorgente=DMZ e destinazione=Internet
     sudo iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT	#permette il traffico in ingresso relativo alle connessioni già stabilite
-    sudo iptables -A INPUT -i $LAN -p tcp --dport 22 -j ACCEPT		#permette il traffico SSH in ingresso con sorgente=LAN
-    sudo iptables -A INPUT -i $EXT -p tcp --dport 22 -j ACCEPT		#permette il traffico SSH in ingresso con sorgente=Internet
-    sudo iptables -A INPUT -p icmp -j ACCEPT					#permette il traffico ICMP in ingresso
-    sudo iptables -A FORWARD -p icmp -j ACCEPT				#permette il traffico ICMP (in forwarding)
+    sudo iptables -A INPUT -i $LAN -p tcp --dport 22 -j ACCEPT	#permette il traffico SSH in ingresso con sorgente=LAN
+    sudo iptables -A INPUT -i $EXT -p tcp --dport 22 -j ACCEPT	#permette il traffico SSH in ingresso con sorgente=Internet
+    sudo iptables -A INPUT -p icmp -j ACCEPT			#permette il traffico ICMP in ingresso
+    sudo iptables -A FORWARD -p icmp -j ACCEPT			#permette il traffico ICMP (in forwarding)
 
 ### Step 9
 Configurare le IP table in Tiny 1 (scripts/tiny1/ConfIpTables.sh):
 
-    sudo iptables -F									#effettua il flush della vecchia configurazione dell'IP table, se presente
+    sudo iptables -F					        #effettua il flush della vecchia configurazione dell'IP table, se presente
     sudo iptables -P INPUT DROP
-    sudo iptables -P OUTPUT ACCEPT						#permette tutto il traffico in uscita
+    sudo iptables -P OUTPUT ACCEPT				        #permette tutto il traffico in uscita
     sudo iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT	#permette il traffico in ingresso relativo alle connessioni già stabilite
-    sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT			#permette il traffico in ingresso SSH
-    sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT			#permette il traffico in ingresso HTTP
-    sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT			#permette il traffico in ingresso HTTPS
+    sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT	        #permette il traffico in ingresso SSH
+    sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT	        #permette il traffico in ingresso HTTP
+    sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT	        #permette il traffico in ingresso HTTPS
