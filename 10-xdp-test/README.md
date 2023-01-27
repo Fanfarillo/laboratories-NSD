@@ -5,7 +5,7 @@ Installare il repository xdp-project e la relativa libreria LIBBPF in Lubuntu 1 
 
     git clone https://github.com/xdp-project/xdp-tutorial
     cd xdp-tutorial
-    git submodule update --init		#scarica LIBBPF nel repo, una libreria che permette di interagire col sottosistema BPF di Linux
+    git submodule update --init	#scarica LIBBPF nel repo, una libreria che permette di interagire col sottosistema BPF di Linux
     sudo apt update
     sudo apt install clang llvm libelf-dev libcap-dev gcc-multilib build-essential
 
