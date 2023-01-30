@@ -36,13 +36,13 @@ Creare il certificato e le chiavi (server, client1, client2 e DH) all'interno de
 
     cd /usr/share/easy-rsa
     cp openssl-1.0.0.cnf openssl.cnf	#copia la configurazione di openssl-1.0.0.cnf nel file openssl.cnf
-    . ./vars					#esporta le variabili di easy-rsa come variabili d'ambiente
+    . ./vars				#esporta le variabili di easy-rsa come variabili d'ambiente
     ./clean-all
-    ./build-ca					#qui dovranno essere inseriti dei dati (country name, ecc.)
+    ./build-ca				#qui dovranno essere inseriti dei dati (country name, ecc.)
     ./build-key-server server		#qui dovranno essere inseriti dei dati (country name, ecc.)
     ./build-key client1			#qui dovranno essere inseriti dei dati (country name, ecc.)
     ./build-key client2			#qui dovranno essere inseriti dei dati (country name, ecc.)
-    ./build-dh					#dh = Diffie-Hellman
+    ./build-dh				#dh = Diffie-Hellman
 
 ### Step 7
 Fare il setup del router R1 (scripts/r1/Setup.sh):
@@ -66,7 +66,7 @@ Fare il setup del router R1 (scripts/r1/Setup.sh):
     ip nat inside source list 101 interface g1/0 overload	#g1/0 = GigabitEthernet 1/0
     end
 
-    copy running-config startup-config				#salva la configurazione del router
+    copy running-config startup-config			#salva la configurazione del router
 
 ### Step 8
 Fare il setup del router R2 (scripts/r2/Setup.sh):
@@ -97,7 +97,7 @@ Rendere il certificato e le chiavi persistenti all'interno del server (scripts/s
 
     cp -r keys/ /gns3volumes/rw/	#/gns3volumes/rw è la directory persistente dei nostri container
     cd /gns3volumes/rw/keys
-    mkdir ccd				#qui verranno creati dei file di configurazione per OpenVPN
+    mkdir ccd			#qui verranno creati dei file di configurazione per OpenVPN
     cd ccd
 
 ### Step 10
