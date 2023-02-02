@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export MKA_CAK=00112233445566778899aabbccddeeff
-export MKA_CAN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
+export MKA_CKN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
 
 nmcli connection add type macsec \
 con-name test-macsec ifname macsec0 \
