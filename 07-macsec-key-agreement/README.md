@@ -7,7 +7,7 @@ Disabilitare tutte le connessioni di rete in Lubuntu 1 e in Lubuntu 2.
 Creare una nuova connessione MacSEC in Lubuntu 1 (scripts/lubuntu1/CreateConnection.sh):
 
     export MKA_CAK=00112233445566778899aabbccddeeff
-    export MKA_CAN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
+    export MKA_CKN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
 
     nmcli connection add type macsec \
     con-name test-macsec ifname macsec0 \
@@ -23,7 +23,7 @@ Creare una nuova connessione MacSEC in Lubuntu 1 (scripts/lubuntu1/CreateConnect
 Creare una nuova connessione MacSEC in Lubuntu 2 (scripts/lubuntu2/CreateConnection.sh):
 
     export MKA_CAK=00112233445566778899aabbccddeeff
-    export MKA_CAN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
+    export MKA_CKN=00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
 
     nmcli connection add type macsec \
     con-name test-macsec ifname macsec0 \
